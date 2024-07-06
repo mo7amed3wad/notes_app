@@ -5,11 +5,19 @@ import 'package:notes/constants/colors.dart';
 class CustomTextField extends StatelessWidget {
   final String title;
   final int maxline;
-  const CustomTextField({super.key, required this.title, this.maxline = 1});
+  final Function(String?)? onSaved;
+  const CustomTextField(
+      {super.key, required this.title, this.maxline = 1, this.onSaved});
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      onSaved: onSaved,
+      validator: (value) {
+        if (value?.isEmpty ?? true) {
+          return "Field is required";
+        }
+      },
       maxLines: maxline,
       cursorColor: prColor,
       decoration: InputDecoration(
