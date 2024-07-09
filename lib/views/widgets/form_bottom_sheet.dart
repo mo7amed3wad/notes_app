@@ -58,7 +58,7 @@ class _AddFormSheetState extends State<AddFormSheet> {
                     var noteModel = NoteSModel(
                         title: title!,
                         subtitle: subtitle!,
-                        date: DateTime.now().toString(),
+                        date: DateTime.now().toString().substring(0, 10),
                         color: Colors.blue.value);
                     BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
                     // ignore: avoid_print

@@ -25,9 +25,12 @@ class _NoteListViewState extends State<NoteListView> {
 
           return ListView.builder(
             itemBuilder: (context, index) {
-              return const Padding(
-                padding: EdgeInsets.symmetric(vertical: 4.0),
-                child: NotesItem(),
+              return  Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: NotesItem(
+
+                  notes: notes[index],
+                ),
               );
             },
             itemCount: notes.length,

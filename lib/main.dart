@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes/bloc_observer.dart';
 import 'package:notes/constants/colors.dart';
+import 'package:notes/cubits/cubit/notes_cubit/cubit/notes_cubit.dart';
 import 'package:notes/models/notes_models.dart';
 import 'package:notes/views/notes_view.dart';
 
@@ -20,13 +21,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-          primaryColor: Colors.amberAccent,
-          brightness: Brightness.dark,
-          scaffoldBackgroundColor: const Color.fromARGB(255, 2, 28, 41)),
-      debugShowCheckedModeBanner: false,
-      home: const NotesView(),
+    return BlocProvider(
+      create: (context) => NotesCubit(),
+      child: MaterialApp(
+        theme: ThemeData(
+            primaryColor: Colors.amberAccent,
+            brightness: Brightness.dark,
+            scaffoldBackgroundColor: const Color.fromARGB(255, 2, 28, 41)),
+        debugShowCheckedModeBanner: false,
+        home: const NotesView(),
+      ),
     );
   }
 }

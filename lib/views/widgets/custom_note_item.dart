@@ -1,11 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes/cubits/cubit/notes_cubit/cubit/notes_cubit.dart';
+import 'package:notes/models/notes_models.dart';
 import 'package:notes/views/edit_view.dart';
 
 class NotesItem extends StatelessWidget {
-  const NotesItem({super.key});
-
+  const NotesItem({super.key, required this.notes});
+  final NoteSModel notes;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -23,23 +26,26 @@ class NotesItem extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
-              title: const Text(
-                "Flutter tips",
+              title: Text(
+                notes.title,
                 style: TextStyle(color: Colors.black, fontSize: 26),
               ),
               subtitle: Padding(
                 padding: const EdgeInsets.only(top: 12),
                 child: Text(
-                  "Build your carrer with Mohamed awad",
+                  notes.subtitle,
                   style: TextStyle(
                       color: Colors.black.withOpacity(0.3), fontSize: 16),
                 ),
               ),
-              trailing: Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 50,
-                ),
-                child: const Icon(
+              trailing: IconButton(
+                onPressed: () {
+                  notes.delete();
+                  BlocProvider.of<NotesCubit>(context).fetchAllNotes();
+                  // ignore: avoid_print
+                  print("item deleted");
+                },
+                icon: const Icon(
                   Icons.delete,
                   color: Colors.black,
                   size: 35,
@@ -50,7 +56,7 @@ class NotesItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  "Feb 5,2024",
+                  notes.date,
                   style: TextStyle(
                       color: Colors.black.withOpacity(0.3), fontSize: 16),
                 )

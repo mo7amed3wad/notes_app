@@ -5,10 +5,7 @@ sealed class NotesState {}
 
 final class NotesInitial extends NotesState {}
 
-final class Notessuccess extends NotesState {
-  final List<NoteSModel> notes;
-  Notessuccess(this.notes);
-}
+final class Notessuccess extends NotesState {}
 
 final class NotesFaliour extends NotesState {
   final String message;
