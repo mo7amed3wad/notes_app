@@ -48,22 +48,27 @@ class _AddFormSheetState extends State<AddFormSheet> {
             maxline: 5,
           ),
           const SizedBox(height: 60),
-          CustomButton(
-            onTap: () {
-              if (formkey.currentState!.validate()) {
-                formkey.currentState!.save();
-                var noteModel = NoteSModel(
-                    title: title!,
-                    subtitle: subtitle!,
-                    date: DateTime.now().toString(),
-                    color: Colors.blue.value);
-                BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
-                // ignore: avoid_print
-                print(noteModel.subtitle);
-              } else {
-                autovalidateMode = AutovalidateMode.always;
-                setState(() {});
-              }
+          BlocBuilder<AddNoteCubit, AddNoteState>(
+            builder: (context, state) {
+              return CustomButton(
+                isLoading: state is AddNoteLoading ? true : false,
+                onTap: () {
+                  if (formkey.currentState!.validate()) {
+                    formkey.currentState!.save();
+                    var noteModel = NoteSModel(
+                        title: title!,
+                        subtitle: subtitle!,
+                        date: DateTime.now().toString(),
+                        color: Colors.blue.value);
+                    BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+                    // ignore: avoid_print
+                    print(noteModel.subtitle);
+                  } else {
+                    autovalidateMode = AutovalidateMode.always;
+                    setState(() {});
+                  }
+                },
+              );
             },
           ),
         ],
