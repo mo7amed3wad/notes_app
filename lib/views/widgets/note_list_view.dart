@@ -21,7 +21,7 @@ class _NoteListViewState extends State<NoteListView> {
       ),
       child: BlocBuilder<NotesCubit, NotesState>(
         builder: (context, state) {
-            List<NoteSModel> notes = BlocProvider.of<NotesCubit>(context).notes!;
+            List<NoteSModel> noteslist = BlocProvider.of<NotesCubit>(context).notes!;
 
           return ListView.builder(
             itemBuilder: (context, index) {
@@ -29,11 +29,11 @@ class _NoteListViewState extends State<NoteListView> {
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
                 child: NotesItem(
 
-                  notes: notes[index],
+                  note: noteslist[index],
                 ),
               );
             },
-            itemCount: notes.length,
+            itemCount: noteslist.length,
             // ignore: avoid_print
           );
           // ignore: avoid_print

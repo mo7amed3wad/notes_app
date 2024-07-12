@@ -7,14 +7,14 @@ import 'package:notes/models/notes_models.dart';
 import 'package:notes/views/edit_view.dart';
 
 class NotesItem extends StatelessWidget {
-  const NotesItem({super.key, required this.notes});
-  final NoteSModel notes;
+  const NotesItem({super.key, required this.note});
+  final NoteSModel note;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return EditNoteView();
+          return EditNoteView(note: note,);
         }));
       },
       child: Container(
@@ -27,20 +27,20 @@ class NotesItem extends StatelessWidget {
           children: [
             ListTile(
               title: Text(
-                notes.title,
+                note.title,
                 style: TextStyle(color: Colors.black, fontSize: 26),
               ),
               subtitle: Padding(
                 padding: const EdgeInsets.only(top: 12),
                 child: Text(
-                  notes.subtitle,
+                  note.subtitle,
                   style: TextStyle(
                       color: Colors.black.withOpacity(0.3), fontSize: 16),
                 ),
               ),
               trailing: IconButton(
                 onPressed: () {
-                  notes.delete();
+                  note.delete();
                   BlocProvider.of<NotesCubit>(context).fetchAllNotes();
                   // ignore: avoid_print
                   print("item deleted");
@@ -56,7 +56,7 @@ class NotesItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  notes.date,
+                  note.date,
                   style: TextStyle(
                       color: Colors.black.withOpacity(0.3), fontSize: 16),
                 )

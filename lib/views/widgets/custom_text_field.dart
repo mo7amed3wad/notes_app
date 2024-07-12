@@ -3,15 +3,24 @@ import 'package:notes/constants/colors.dart';
 
 // ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
-  final String title;
+   String? title;
   final int maxline;
   final Function(String?)? onSaved;
-  const CustomTextField(
-      {super.key, required this.title, this.maxline = 1, this.onSaved});
+  final Function(String)? onChanged;
+  TextEditingController? controller;
+  CustomTextField(
+      {super.key,
+       this.title,
+      this.maxline = 1,
+      this.onSaved,
+      this.onChanged,
+      this.controller});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      onChanged: onChanged,
       onSaved: onSaved,
       validator: (value) {
         if (value?.isEmpty ?? true) {

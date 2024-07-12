@@ -25,13 +25,16 @@ class _NotesViewWidgetState extends State<NotesViewWidget> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15),
       child: Column(
-        children: const [
+        children: [
           SizedBox(
             height: 10,
           ),
           CostumAppbar(
-            icon: Icons.search,
+            icon: Icon(Icons.search),
             title: "Notes",
+            onPressed: () {
+              print("awad");
+            },
           ),
           Expanded(child: NoteListView())
         ],
